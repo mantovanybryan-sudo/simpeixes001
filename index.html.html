@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sim Peixes | Insumos e Equipamentos para Piscicultura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .bg-sim-blue { background-color: #0056b3; }
+        .text-sim-blue { color: #0056b3; }
+        .border-sim-blue { border-color: #0056b3; }
+        
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ef4444;
+            color: white;
+            font-size: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid white;
+        }
+
+        .category-pill.active {
+            background-color: #0056b3;
+            color: white;
+            border-color: #0056b3;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- TOP BAR -->
+    <div class="bg-sim-blue text-white text-center py-2 text-xs font-medium tracking-wide">
+        🚀 Envio para todo o Brasil | 💳 Parcelamento em até 6x sem juros | ✅ Compra 100% Segura
+    </div>
+
+    <!-- HEADER -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="showPage('home')">
+                <div class="bg-sim-blue p-2 rounded-lg shadow-lg">
+                    <i data-lucide="fish" class="text-white w-6 h-6"></i>
+                </div>
+                <span class="text-2xl font-bold text-sim-blue tracking-tighter">SIM<span class="text-gray-600">PEIXES</span></span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 font-medium text-gray-600">
+                <a href="javascript:void(0)" onclick="showPage('home')" class="hover:text-sim-blue transition-colors">Início</a>
+                <a href="javascript:void(0)" onclick="showPage('shop')" class="hover:text-sim-blue transition-colors">Loja</a>
+                <a href="javascript:void(0)" onclick="showPage('faq')" class="hover:text-sim-blue transition-colors">Guia Técnico</a>
+                <a href="javascript:void(0)" onclick="showPage('contact')" class="hover:text-sim-blue transition-colors">Contato</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button onclick="showPage('cart')" class="relative p-2 text-gray-600 hover:text-sim-blue transition-colors">
+                    <i data-lucide="shopping-cart"></i>
+                    <span id="cart-count" class="cart-badge">0</span>
+                </button>
+                <button class="md:hidden p-2" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content">
+        
+        <!-- HOME PAGE -->
+        <section id="page-home" class="page active">
+            <div class="relative h-[600px] bg-sim-blue flex items-center overflow-hidden">
+                <div class="absolute inset-0 opacity-30">
+                    <img src="https://images.unsplash.com/photo-1524700608663-9a6777779471?auto=format&fit=crop&q=80&w=1600" class="w-full h-full object-cover" alt="Piscicultura">
+                </div>
+                <div class="container mx-auto px-4 relative z-10 text-white">
+                    <span class="bg-white/20 backdrop-blur-md px-4 py-1 rounded-full text-sm font-medium mb-4 inline-block">Parceiro do Produtor Rural</span>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Aumente a Rentabilidade <br>da sua Piscicultura</h1>
+                    <p class="text-lg md:text-xl mb-10 opacity-90 max-w-2xl">A maior central de distribuição de alevinos, equipamentos e insumos de alta performance para todo o Brasil.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="showPage('shop')" class="bg-white text-sim-blue px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-all shadow-xl flex items-center gap-2">
+                            Explorar Catálogo <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                        <button onclick="showPage('contact')" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-sim-blue transition-all">
+                            Consultoria Técnica
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 py-20 grid md:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-sim-blue text-center">
+                    <i data-lucide="shield-check" class="text-sim-blue w-10 h-10 mx-auto mb-4"></i>
+                    <h3 class="font-bold mb-2">Compra Segura</h3>
+                    <p class="text-gray-500 text-sm">Garantia total em todas as transações e entrega.</p>
+                </div><div class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-sim-blue text-center">
+                    <i data-lucide="truck" class="text-sim-blue w-10 h-10 mx-auto mb-4"></i>
+                    <h3 class="font-bold mb-2">Envio Nacional</h3>
+                    <p class="text-gray-500 text-sm">Logística especializada para transporte de alevinos.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-sim-blue text-center">
+                    <i data-lucide="credit-card" class="text-sim-blue w-10 h-10 mx-auto mb-4"></i>
+                    <h3 class="font-bold mb-2">6x Sem Juros</h3>
+                    <p class="text-gray-500 text-sm">Facilidade de pagamento para investir no seu negócio.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-sim-blue text-center">
+                    <i data-lucide="trending-up" class="text-sim-blue w-10 h-10 mx-auto mb-4"></i>
+                    <h3 class="font-bold mb-2">Alta Produção</h3>
+                    <p class="text-gray-500 text-sm">Maior ganho de peso em menor tempo de engorda.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOP PAGE -->
+        <section id="page-shop" class="page container mx-auto px-4 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800">Catálogo de Produtos</h2>
+                    <p class="text-gray-500">Selecione a categoria desejada</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-2" id="category-filters">
+                    <button onclick="filterProducts('all', event)" class="category-pill active px-5 py-2 rounded-full border border-sim-blue text-sm font-medium transition-all">Todos</button>
+                    <button onclick="filterProducts('vivos', event)" class="category-pill px-5 py-2 rounded-full border border-sim-blue text-sm font-medium transition-all">Alevinos</button>
+                    <button onclick="filterProducts('equipamentos', event)" class="category-pill px-5 py-2 rounded-full border border-sim-blue text-sm font-medium transition-all">Equipamentos</button>
+                    <button onclick="filterProducts('pesca', event)" class="category-pill px-5 py-2 rounded-full border border-sim-blue text-sm font-medium transition-all">Pesca</button>
+                    <button onclick="filterProducts('insumos', event)" class="category-pill px-5 py-2 rounded-full border border-sim-blue text-sm font-medium transition-all">Insumos/Rações</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="product-grid">
+                <!-- Products injected by JS -->
+            </div>
+        </section>
+
+        <!-- FAQ PAGE -->
+        <section id="page-faq" class="page container mx-auto px-4 py-12">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Guia Técnico de Aquicultura</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Informações essenciais para a gestão eficiente de tanques e escolha de espécies.</p>
+            </div>
+            <div class="max-w-3xl mx-auto space-y-4" id="faq-container">
+                <!-- FAQ injected by JS -->
+            </div>
+        </section>
+
+        <!-- CONTACT PAGE -->
+        <section id="page-contact" class="page container mx-auto px-4 py-12">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">Fale com Nossos Especialistas</h2>
+                    <p class="text-gray-600 mb-10 text-lg">Precisa de ajuda para calcular a densidade de estocagem ou escolher o aerador ideal? Nossa equipe técnica está à disposição.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 p-5 bg-white rounded-2xl shadow-sm border-l-4 border-sim-blue">
+                            <i data-lucide="phone" class="text-sim-blue w-6 h-6"></i>
+                            <span class="font-medium">(62) 99999-9999</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-5 bg-white rounded-2xl shadow-sm border-l-4 border-sim-blue">
+                            <i data-lucide="mail" class="text-sim-blue w-6 h-6"></i>
+                            <span class="font-medium">contato@simpeixes.com.br</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-5 bg-white rounded-2xl shadow-sm border-l-4 border-sim-blue">
+                            <i data-lucide="map-pin" class="text-sim-blue w-6 h-6"></i>
+                            <span class="font-medium">Central de Distribuição - Goiás, Brasil</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-10 rounded-3xl shadow-2xl border border-gray-100">
+                    <form class="space-y-5" onsubmit="event.preventDefault(); alert('Sua solicitação foi enviada! Um técnico entrará em contato em breve.')">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Nome Completo</label>
+                            <input type="text" class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-sim-blue outline-none transition-all" placeholder="Ex: João Silva">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">E-mail</label>
+                            <input type="email" class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-sim-blue outline-none transition-all" placeholder="joao@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Assunto</label>
+                            <select class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-sim-blue outline-none transition-all">
+                                <option>Compra de Alevinos</option>
+                                <option>Equipamentos/Aeradores</option>
+                                <option>Consultoria Técnica</option>
+                                <option>Outros</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Mensagem</label>
+                            <textarea class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-sim-blue outline-none transition-all h-32" placeholder="Descreva sua necessidade..."></textarea>
+                        </div>
+                        <button class="w-full bg-sim-blue text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg uppercase tracking-wide">Enviar Solicitação</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- CART PAGE -->
+        <section id="page-cart" class="page container mx-auto px-4 py-12">
+            <h2 class="text-3xl font-bold mb-10 text-center">Seu Pedido</h2>
+            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+                <div id="cart-items" class="p-8 space-y-6">
+                    <!-- Cart items injected by JS -->
+                </div>
+                <div class="p-8 bg-gray-50 border-t flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="text-3xl font-bold">Total: <span id="cart-total" class="text-sim-blue">R$ 0,00</span></div>
+                    <button onclick="checkout()" class="bg-sim-blue text-white px-12 py-4 rounded-full font-bold hover:bg-blue-700 transition-all shadow-lg uppercase tracking-wider">Finalizar Pedido</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white py-16 mt-20">
+        <div class="container mx-auto px-4 grid md:grid-cols-4 gap-12">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center gap-2 mb-6">
+                    <i data-lucide="fish" class="text-sim-blue w-8 h-8"></i>
+                    <span class="text-3xl font-bold tracking-tighter">SIM<span class="text-gray-400">PEIXES</span></span>
+                </div>
+                <p class="text-gray-400 max-w-md leading-relaxed">Líder em fornecimento de insumos e tecnologia para a piscicultura brasileira. Nosso compromisso é com a produtividade e a saúde do seu plantel.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-6">Navegação</h4>
+                <ul class="text-gray-400 space-y-3 text-sm">
+                    <li><a href="javascript:void(0)" onclick="showPage('home')" class="hover:text-white transition">Início</a></li>
+                    <li><a href="javascript:void(0)" onclick="showPage('shop')" class="hover:text-white transition">Loja de Insumos</a></li>
+                    <li><a href="javascript:void(0)" onclick="showPage('faq')" class="hover:text-white transition">Guia Técnico</a></li>
+                    <li><a href="javascript:void(0)" onclick="showPage('contact')" class="hover:text-white transition">Contato</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-6">Conecte-se</h4>
+                <div class="flex gap-4">
+                    <a href="#" class="p-3 bg-gray-800 rounded-full hover:bg-sim-blue transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="#" class="p-3 bg-gray-800 rounded-full hover:bg-sim-blue transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a href="#" class="p-3 bg-gray-800 rounded-full hover:bg-sim-blue transition-all"><i data-lucide="phone" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-16 pt-8 border-t border-gray-800 text-center text-gray-500 text-xs">
+            &copy; 2026 Sim Peixes - Especialistas em Piscicultura. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, name: 'Alevinos Tilápia Gift', category: 'vivos', price: 180.00, img: 'https://images.unsplash.com/photo-1535591271162-617773377712?auto=format&fit=crop&q=80&w=400', desc: 'Revertida 97% macho. Crescimento acelerado e alta conversão alimentar.' },
+            { id: 2, name: 'Alevinos de Tambacu', category: 'vivos', price: 140.00, img: 'https://images.unsplash.com/photo-1524700608663-9a6777779471?auto=format&fit=crop&q=80&w=400', desc: 'Excelente aceitação de mercado e rusticidade.' },
+            { id: 3, name: 'Alevinos Pintado Real', category: 'vivos', price: 210.00, img: 'https://images.unsplash.com/photo-1615211631397-763773377712?auto=format&fit=crop&q=80&w=400', desc: 'Espécie nobre com alto valor agregado no abate.' },
+            { id: 4, name: 'Alevinos Piau-açu', category: 'vivos', price: 160.00, img: 'https://images.unsplash.com/photo-1544551763-46707f259676?auto=format&fit=crop&q=80&w=400', desc: 'Ideal para tanques com maior volume de água.' },
+            { id: 5, name: 'Alevinos Curimbatá', category: 'vivos', price: 130.00, img: 'https://images.unsplash.com/photo-1524700608663-9a6777779471?auto=format&fit=crop&q=80&w=400', desc: 'Alta eficiência em sistemas de engorda.' },
+            { id: 6, name: 'Alevinos Tambatinga', category: 'vivos', price: 150.00, img: 'https://images.unsplash.com/photo-1535591271162-617773377712?auto=format&fit=crop&q=80&w=400', desc: 'Híbrido resistente com ótimo ganho de peso.' },
+            { id: 7, name: 'Alevinos Pirarucu', category: 'vivos', price: 250.00, img: 'https://images.unsplash.com/photo-1615211631397-763773377712?auto=format&fit=crop&q=80&w=400', desc: 'O gigante da Amazônia. Alta demanda gourmet.' },
+            { id: 8, name: 'Alevinos Dourado', category: 'vivos', price: 280.00, img: 'https://images.unsplash.com/photo-1544551763-46707f259676?auto=format&fit=crop&q=80&w=400', desc: 'Espécie exótica de alto valor e beleza.' },
+            { id: 10, name: 'Aerador Chafariz Aquamix 1.5CV', category: 'equipamentos', price: 1450.00, img: 'https://images.unsplash.com/photo-1583212292454-1be677787f77?auto=format&fit=crop&q=80&w=400', desc: 'Máxima oxigenação para tanques de engorda comercial.' },
+            { id: 11, name: 'Aerador Chafariz Aquamix 1.0CV', category: 'equipamentos', price: 1100.00, img: 'https://images.unsplash.com/photo-1583212292454-1be677787f77?auto=format&fit=crop&q=80&w=400', desc: 'Eficiência energética para tanques médios. Sob encomenda.' },
+            { id: 12, name: 'Bomba de Recirculação RAS', category: 'equipamentos', price: 580.00, img: 'https://images.unsplash.com/photo-1583212292454-1be677787f77?auto=format&fit=crop&q=80&w=400', desc: 'Ideal para sistemas de recirculação de água.' },
+            { id: 20, name: 'Ração Supra Inicial 25kg', category: 'insumos', price: 195.00, img: 'https://images.unsplash.com/photo-1594489428504-5c047355f775?auto=format&fit=crop&q=80&w=400', desc: 'Nutrição de alta precisão para alevinos.' },
+            { id: 21, name: 'Ração Beraqua Crescimento 25kg', category: 'insumos', price: 175.00, img: 'https://images.unsplash.com/photo-1594489428504-5c047355f775?auto=format&fit=crop&q=80&w=400', desc: 'Foco em ganho de massa muscular rápido.' },
+            { id: 22, name: 'Kit Labcon Teste de Água', category: 'insumos', price: 320.00, img: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&q=80&w=400', desc: 'Análise de pH, Amônia, Nitrito e Oxigênio.' },
+            { id: 30, name: 'Vara de Pesca Carbono Ultra-Light', category: 'pesca', price: 1250.00, img: 'https://images.unsplash.com/photo-1544551763-46707f259676?auto=format&fit=crop&q=80&w=400', desc: 'Fibra de carbono de alta densidade, ultra sensível e resistente.' },
+            { id: 31, name: 'Molinete Shimano Stella SW', category: 'pesca', price: 4800.00, img: 'https://images.unsplash.com/photo-1615211631397-763773377712?auto=format&fit=crop&q=80&w=400', desc: 'O topo de linha mundial. Vedação total e drag extremamente suave.' },
+            { id: 32, name: 'Linha Nylon Fluorocarbono Top', category: 'pesca', price: 320.00, img: 'https://images.unsplash.com/photo-1594489428504-5c047355f775?auto=format&fit=crop&q=80&w=400', desc: 'Invisível na água, alta resistência à abrasão e zero memória.' },
+            { id: 33, name: 'Vara Telescópica Profissional', category: 'pesca', price: 890.00, img: 'https://images.unsplash.com/photo-1544551763-46707f259676?auto=format&fit=crop&q=80&w=400', desc: 'Equilíbrio perfeito entre peso e potência para grandes capturas.' }
+        ];
+
+        const faqs = [
+            { q: 'O que é Piscicultura?', a: 'É a ciência e a técnica de criar peixes em ambientes controlados (tanques, redes, etc), visando a produção de alimento para consumo humano.' },
+            { q: 'Qual a diferença entre Carcinicultura e Ranicultura?', a: 'A Carcinicultura é a criação de camarões, enquanto a Ranicultura é a criação de rãs.' },
+            { q: 'O que é Malacocultura e Algicultura?', a: 'Malacocultura refere-se ao cultivo de moluscos (ostras, mexilhões) e Algicultura ao cultivo de algas.' },
+            { q: 'Como funciona o Sistema de Monge?', a: 'É um dispositivo hidráulico instalado no tanque que permite controlar a profundidade da água e realizar a drenagem dos resíduos acumulados no fundo.' },
+            { q: 'Qual a importância do teste de Amônia Tóxica?', a: 'A amônia é um subproduto do metabolismo dos peixes e restos de ração. Em níveis altos, torna-se tóxica, podendo causar a morte súbita de todo o plantel.' },
+        ];
+
+        let cart = [];
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            filtered.forEach(p => {
+                grid.innerHTML += `
+                    <div class="product-card bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="relative">
+                            <img src="${p.img}" class="w-full h-56 object-cover" alt="${p.name}">
+                            <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-sim-blue text-[10px] font-bold uppercase px-3 py-1 rounded-full shadow-sm tracking-wider">${p.category}</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2 text-gray-800">${p.name}</h3>
+                            <p class="text-gray-500 text-sm mb-6 leading-relaxed">${p.desc}</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-xs text-gray-400 uppercase font-medium">Preço Unit.</span>
+                                    <span class="text-2xl font-bold text-gray-900">R$ ${p.price.toFixed(2)}</span>
+                                </div>
+                                <button onclick="addToCart(${p.id}, event)" class="bg-sim-blue text-white p-3 rounded-2xl hover:bg-blue-700 transition-all shadow-lg">
+                                    <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            lucide.createIcons();
+        }
+
+        function filterProducts(cat, event) {
+            document.querySelectorAll('.category-pill').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            renderProducts(cat);
+        }
+
+        function addToCart(id, event) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            updateCart();
+            const btn = event.currentTarget;
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<i data-lucide="check" class="w-6 h-6"></i>';
+            btn.classList.replace('bg-sim-blue', 'bg-green-500');
+            lucide.createIcons();
+            setTimeout(() => {
+                btn.innerHTML = originalContent;
+                btn.classList.replace('bg-green-500', 'bg-sim-blue');
+                lucide.createIcons();
+            }, 1000);
+        }
+
+        function updateCart() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const cartContainer = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+            if (cart.length === 0) {
+                cartContainer.innerHTML = `<div class="text-center py-20"><i data-lucide="shopping-bag" class="w-16 h-16 text-gray-300 mx-auto mb-4"></i><p class="text-gray-500 text-lg">Seu carrinho está vazio no momento.</p><button onclick="showPage('shop')" class="mt-6 text-sim-blue font-bold hover:underline">Voltar para a loja</button></div>`;
+                totalEl.innerText = 'R$ 0,00';
+                lucide.createIcons();
+                return;
+            }
+            cartContainer.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartContainer.innerHTML += `
+                    <div class="flex items-center justify-between p-5 bg-gray-50 rounded-2xl border border-gray-200 transition-all hover:bg-white hover:shadow-md">
+                        <div class="flex items-center gap-5">
+                            <img src="${item.img}" class="w-20 h-20 object-cover rounded-xl shadow-sm">
+                            <div><h4 class="font-bold text-gray-800">${item.name}</h4><span class="text-sim-blue font-semibold">R$ ${item.price.toFixed(2)}</span></div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600 p-2 rounded-lg transition-colors"><i data-lucide="trash-2" class="w-6 h-6"></i></button>
+                    </div>
+                `;
+            });
+            totalEl.innerText = `R$ ${total.toFixed(2)}`;
+            lucide.createIcons();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function checkout() {
+            if (cart.length === 0) return alert('Adicione produtos ao carrinho!');
+            alert('Seu pedido foi processado! Nossa equipe entrará em contato via WhatsApp para combinar a logística de entrega.');
+            cart = [];
+            updateCart();
+            showPage('home');
+        }
+
+        function renderFAQ() {
+            const container = document.getElementById('faq-container');
+            faqs.forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <button onclick="toggleFaq(${index})" class="w-full p-6 text-left flex justify-between items-center font-bold text-gray-800 hover:bg-gray-50 transition-all">
+                            ${item.q}
+                            <i id="faq-icon-${index}" data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
+                        </button>
+                        <div id="faq-ans-${index}" class="hidden p-6 pt-0 text-gray-600 border-t border-gray-50 leading-relaxed">${item.a}</div>
+                    </div>
+                `;
+            });
+            lucide.createIcons();
+        }
+
+        function toggleFaq(index) {
+            const ans = document.getElementById(`faq-ans-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            ans.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        function toggleMobileMenu() {
+            alert('Menu mobile em desenvolvimento.');
+        }
+
+        window.onload = () => {
+            renderProducts();
+            renderFAQ();
+            updateCart();
+            lucide.createIcons();
+        };
+    </script>
+</body>
+</html>
